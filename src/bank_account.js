@@ -85,6 +85,25 @@ class BankAccount {
   format () {
     return this.number.join('')
   }
+
+  /* Test if the Bank Account number is valid
+   *
+   * @returns {boolean}
+   */
+  isValid () {
+    // A number must be exactly 9 characters in length
+    if (this.number.length !== 9) return false
+
+    // A checksum is calculated by iterating over the numbers in reverse,
+    // then multiplying each number by it's position, beginning with 1,
+    // then summing the results.
+    const checksum = Array.from(this.number)
+      .reverse()
+      .reduce((sum, num, pos) => sum + ((pos + 1) * num), 0)
+
+    // If the checksum if exactly divisible by 11 then it is valid
+    return (checksum % 11) === 0
+  }
 }
 
 module.exports = BankAccount

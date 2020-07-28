@@ -231,4 +231,38 @@ describe('BankAccount', () => {
       expect(bankAccount.format()).toBe(number)
     })
   })
+
+  describe('#isValid', () => {
+    describe('when the bank account checksum is valid', () => {
+      const bankAccount = new BankAccount('345882865')
+
+      it('returns true', () => {
+        expect(bankAccount.isValid()).toBeTrue()
+      })
+    })
+
+    describe('when the bank account checksum is not valid', () => {
+      const bankAccount = new BankAccount('345882864')
+
+      it('returns false', () => {
+        expect(bankAccount.isValid()).toBeFalse()
+      })
+    })
+
+    describe('when the bank account is too short', () => {
+      const bankAccount = new BankAccount('34588280')
+
+      it('returns false', () => {
+        expect(bankAccount.isValid()).toBeFalse()
+      })
+    })
+
+    describe('when the bank account is too long', () => {
+      const bankAccount = new BankAccount('3458828656')
+
+      it('returns false', () => {
+        expect(bankAccount.isValid()).toBeFalse()
+      })
+    })
+  })
 })
