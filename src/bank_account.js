@@ -12,6 +12,14 @@ class BankAccount {
     this.number = Array.from(number)
     this.digits = digits
   }
+
+  /* Format the Bank Account number
+   *
+   * @returns {string}
+   */
+  format () {
+    return this.number.join('')
+  }
 }
 
 module.exports = BankAccount

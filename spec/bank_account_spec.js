@@ -24,4 +24,13 @@ describe('BankAccount', () => {
       expect(bankAccount.digits).toBe(digits)
     })
   })
+
+  describe('#format', () => {
+    const number      = '345882865'
+    const bankAccount = new BankAccount(number)
+
+    it('returns expected string', () => {
+      expect(bankAccount.format()).toBe(number)
+    })
+  })
 })
