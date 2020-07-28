@@ -58,6 +58,12 @@ describe('BankAccount', () => {
     })
   })
 
+  describe('.ALTERNATIVES', () => {
+    it('returns the expected alternatives', () => {
+      expect(BankAccount.ALTERNATIVES).toEqual({})
+    })
+  })
+
   describe('.split', () => {
     describe('when the text is 0', () => {
       it('returns zero', () => {

@@ -12,6 +12,9 @@ class BankAccount {
   // A list of all possible digits defined in the template
   static DIGITS = this.split(template)
 
+  // A map of all alternatives to the 10 digits
+  static ALTERNATIVES = {}
+
   /* Split the text into an Array of digits
    *
    * @param {string} text
