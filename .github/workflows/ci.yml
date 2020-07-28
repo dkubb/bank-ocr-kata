@@ -1,0 +1,28 @@
+name: CI
+
+on: push
+
+jobs:
+  base:
+    name: Base steps
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check Whitespace
+      run: git diff --check -- HEAD~1
+  javascript:
+    name: Javascript steps
+    needs: base
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # fetch all history w/timestamps
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: '14'
+    - name: Verify generated files are fresh
+      run: git diff --exit-code
