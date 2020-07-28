@@ -45,6 +45,29 @@ class BankAccount {
       .join('\n')
   }
 
+  /* Parse the text into a Bank Account
+   *
+   * @param {string} text
+   *
+   * @returns {BankAccount}
+   */
+  static parse(text) {
+    const digits = this.split(text)
+    const number = digits.map(digit => this.matchDigit(digit))
+    return new this(number, digits)
+  }
+
+  /* Match the digit exactly
+   *
+   * @param {string}
+   *
+   * @returns {string}
+   * @private
+   */
+  static matchDigit(digit) {
+    return this.DIGITS.indexOf(digit)
+  }
+
   /* Initialize the Bank Account
    *
    * @param {(string|string[])} number
