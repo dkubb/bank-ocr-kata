@@ -37,3 +37,4 @@ jobs:
     - run: yarn install
     - name: Verify generated files are fresh
       run: git diff --exit-code
+    - run: yarn lint
