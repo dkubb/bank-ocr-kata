@@ -57,7 +57,7 @@ class BankAccount {
     return new this(number, digits)
   }
 
-  /* Match the digit exactly
+  /* Match the digit exactly or return ? for unknown digits
    *
    * @param {string}
    *
@@ -65,7 +65,8 @@ class BankAccount {
    * @private
    */
   static matchDigit(digit) {
-    return this.DIGITS.indexOf(digit)
+    const index = this.DIGITS.indexOf(digit)
+    return index === -1 ? '?' : index
   }
 
   /* Initialize the Bank Account
