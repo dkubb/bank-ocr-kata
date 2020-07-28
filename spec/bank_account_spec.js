@@ -272,5 +272,13 @@ describe('BankAccount', () => {
         expect(bankAccount.isValid()).toBeFalse()
       })
     })
+
+    describe('when the bank account is not legible', () => {
+      const bankAccount = new BankAccount('34588286?')
+
+      it('returns false', () => {
+        expect(bankAccount.isValid()).toBeFalse()
+      })
+    })
   })
 })
