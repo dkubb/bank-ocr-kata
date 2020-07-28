@@ -43,6 +43,28 @@ describe('BankAccount', () => {
     })
   })
 
+  describe('.join', () => {
+    describe('when there are no digits', () => {
+      it('returns the expected string', () => {
+        expect(BankAccount.join([])).toBe('\n\n')
+      })
+    })
+
+    describe('when there is one digit', () => {
+      it('returns the expected string', () => {
+        expect(BankAccount.join([zero.join('')])).toBe(zero.join('\n'))
+      })
+    })
+
+    describe('when there are two digits', () => {
+      it('returns the expected string', () => {
+        const digits = [zero.join(''), one.join('')]
+
+        expect(BankAccount.join(digits)).toBe(zero_one.join('\n'))
+      })
+    })
+  })
+
   describe('constructor', () => {
     const number      = '345882865'
     const digits      = ''

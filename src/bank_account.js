@@ -23,6 +23,19 @@ class BankAccount {
     }, [])
   }
 
+  /* Join the Array of digits into text
+   *
+   * @param {Array<string>} digits
+   *
+   * @returns {string}
+   */
+  static join(digits) {
+    // Iterate over each digit, reading each line in series
+    return [0, 1, 2]
+      .map(lineNo => digits.map(digit => digit.substr(lineNo * 3, 3)).join(''))
+      .join('\n')
+  }
+
   /* Initialize the Bank Account
    *
    * @param {(string|string[])} number
