@@ -1,7 +1,16 @@
 'use strict'
 
+const template = [
+  ' _     _  _     _  _  _  _  _ ',
+  '| |  | _| _||_||_ |_   ||_||_|',
+  '|_|  ||_  _|  | _||_|  ||_| _|'
+].join('\n')
+
 /** A class representing a Bank Account. */
 class BankAccount {
+
+  // A list of all possible digits defined in the template
+  static DIGITS = this.split(template)
 
   /* Split the text into an Array of digits
    *

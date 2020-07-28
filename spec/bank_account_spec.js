@@ -21,6 +21,43 @@ describe('BankAccount', () => {
     expect(BankAccount).toBeDefined()
   })
 
+  describe('.DIGITS', () => {
+    it('returns the expected digits', () => {
+      expect(BankAccount.DIGITS).toEqual([
+        ' _ ' +
+        '| |' +
+        '|_|',
+        '   ' +
+        '  |' +
+        '  |',
+        ' _ ' +
+        ' _|' +
+        '|_ ',
+        ' _ ' +
+        ' _|' +
+        ' _|',
+        '   ' +
+        '|_|' +
+        '  |',
+        ' _ ' +
+        '|_ ' +
+        ' _|',
+        ' _ ' +
+        '|_ ' +
+        '|_|',
+        ' _ ' +
+        '  |' +
+        '  |',
+        ' _ ' +
+        '|_|' +
+        '|_|',
+        ' _ ' +
+        '|_|' +
+        ' _|'
+      ])
+    })
+  })
+
   describe('.split', () => {
     describe('when the text is 0', () => {
       it('returns zero', () => {
