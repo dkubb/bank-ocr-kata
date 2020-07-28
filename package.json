@@ -1,0 +1,9 @@
+{
+  "name": "bank-ocr-kata",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Dan Kubb <github@dan.kubb.ca>",
+  "license": "MIT",
+  "private": true
+}
+
