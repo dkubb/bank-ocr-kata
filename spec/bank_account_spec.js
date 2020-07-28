@@ -281,4 +281,22 @@ describe('BankAccount', () => {
       })
     })
   })
+
+  describe('#isLegible', () => {
+    describe('when the bank account is legible', () => {
+      const bankAccount = new BankAccount('345882865')
+
+      it('returns true', () => {
+        expect(bankAccount.isLegible()).toBeTrue()
+      })
+    })
+
+    describe('when the bank account is not legible', () => {
+      const bankAccount = new BankAccount('34588286?')
+
+      it('returns false', () => {
+        expect(bankAccount.isLegible()).toBeFalse()
+      })
+    })
+  })
 })

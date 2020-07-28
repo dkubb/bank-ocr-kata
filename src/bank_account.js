@@ -105,6 +105,15 @@ class BankAccount {
     // If the checksum if exactly divisible by 11 then it is valid
     return (checksum % 11) === 0
   }
+
+  /* Test if the Bank Account number is legible
+   *
+   * @returns {boolean}
+   */
+  isLegible () {
+    // The question mark cannot appear in the number for it to be legible
+    return this.number.indexOf('?') === -1
+  }
 }
 
 module.exports = BankAccount
