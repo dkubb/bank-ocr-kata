@@ -1,5 +1,9 @@
 'use strict'
 
+const BankAccount = require('../src/bank_account')
+
 describe('BankAccount', () => {
-  it('passes')
+  it('exists', () => {
+    expect(BankAccount).toBeDefined()
+  })
 })
