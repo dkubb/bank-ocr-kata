@@ -133,4 +133,26 @@ class BankAccount {
   }
 }
 
+const alts = BankAccount.ALTERNATIVES
+
+// Use the number 8 as a template because every character for the specific
+// position is set.
+const eight = BankAccount.DIGITS[8]
+
+// Precompute all possible alternative digits
+BankAccount.DIGITS.forEach((digit, index) => {
+  // Walk through each position and substitute a space or a valid character
+  // relative to the position.
+  for (const pos in digit) {
+    for (const replacement of [' ', eight[pos]]) {
+
+      // Map the character to the set of allowed alternatives for that index
+      const copy = Array.from(digit)
+      copy[pos] = replacement
+      const key = copy.join('')
+      alts[key] ? alts[key].add(index) : alts[key] = new Set([index])
+    }
+  }
+})
+
 module.exports = BankAccount

@@ -59,8 +59,9 @@ describe('BankAccount', () => {
   })
 
   describe('.ALTERNATIVES', () => {
-    it('returns the expected alternatives', () => {
-      expect(BankAccount.ALTERNATIVES).toEqual({})
+    it('returns a non-empty object', () => {
+      expect(BankAccount.ALTERNATIVES).toBeInstanceOf(Object)
+      expect(BankAccount.ALTERNATIVES).not.toEqual({})
     })
   })
 
