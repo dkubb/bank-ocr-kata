@@ -3,8 +3,12 @@ module.exports = {
     es2020: true,
     node: true
   },
+  plugins: [
+    'jsdoc'
+  ],
   extends: [
     'eslint:recommended',
+    'plugin:jsdoc/recommended'
   ],
   parser: 'babel-eslint',
   parserOptions: {
