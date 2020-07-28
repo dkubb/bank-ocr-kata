@@ -331,6 +331,22 @@ describe('BankAccount', () => {
         expect(bankAccount.statusLine()).toBe('345882864 ERR\n')
       })
     })
+
+    describe('when the bank account is ambiguous', () => {
+      const text = [
+        ' _  _  _  _  _  _  _  _  _ ',
+        '|_||_||_||_||_||_||_||_||_|',
+        '|_||_||_||_||_||_||_||_||_|'
+      ]
+
+      const bankAccount = BankAccount.parse(text.join('\n'))
+
+      it('returns the ambiguous status', () => {
+        expect(bankAccount.statusLine()).toBe(
+          "888888888 AMB ['888886888', '888888880', '888888988']\n"
+        )
+      })
+    })
   })
 
   describe('#alternatives', () => {

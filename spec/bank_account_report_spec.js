@@ -53,7 +53,7 @@ describe('BankAccountReport', () => {
     it('returns the report', () => {
       expect(report.generate()).toEqual([
         '000000051\n',
-        '664371495 ERR\n',
+        '664371485\n',
         '49006771? ILL\n',
         '1234?678? ILL\n'
       ])

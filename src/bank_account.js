@@ -123,10 +123,17 @@ class BankAccount {
    * @returns {string}
    */
   statusLine () {
-    // Display illegible or error status. If the Bank Account
+    const alternatives = this.alternatives()
+    if (alternatives.length === 1) return alternatives[0].statusLine()
+
+    const ambiguous = alternatives.map(ba => `'${ba.format()}'`).join(', ')
+
+    // If there are ambiguous Bank Account numbers return them,
+    // otherwise display illegible or error status. If the Bank Account
     // is valid, then return no status.
-    const status = !this.isLegible() ? ' ILL' :
-                   !this.isValid()   ? ' ERR' :
+    const status = ambiguous         ? ` AMB [${ambiguous}]` :
+                   !this.isLegible() ? ' ILL'                :
+                   !this.isValid()   ? ' ERR'                :
                                        ''
 
     return `${this.format()}${status}\n`
