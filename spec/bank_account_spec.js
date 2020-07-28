@@ -332,4 +332,165 @@ describe('BankAccount', () => {
       })
     })
   })
+
+  describe('#alternatives', () => {
+    const expectAlternativeAccounts = (bankAccount, expected) => {
+      const format = ba => ba.format()
+
+      expect(bankAccount.alternatives().map(format))
+        .toEqual(expected.map(format))
+    }
+
+    describe('when the bank account is valid', () => {
+      const bankAccount = new BankAccount('345882865')
+
+      it('returns an empty Array', () => {
+        expectAlternativeAccounts(bankAccount, [])
+      })
+    })
+
+    describe('when the bank account is not legible', () => {
+      describe('when there is no valid alternative', () => {
+        const text = [
+          ' _     _  _  _  _  _  _  _ ',
+          ' _||_||_ |_||_| _||_||_ |_ ',
+          ' _|  | _||_||_||_ |_||_|   '
+        ]
+
+        const bankAccount = BankAccount.parse(text.join('\n'))
+
+        it('returns an empty Array', () => {
+          expectAlternativeAccounts(bankAccount, [])
+        })
+      })
+
+      const testCases = [
+        [
+          '111111111',
+          ['711111111'],
+          [
+            '                           ',
+            '  |  |  |  |  |  |  |  |  |',
+            '  |  |  |  |  |  |  |  |  |'
+          ]
+        ],
+        [
+          '777777777',
+          ['777777177'],
+          [
+            ' _  _  _  _  _  _  _  _  _ ',
+            '  |  |  |  |  |  |  |  |  |',
+            '  |  |  |  |  |  |  |  |  |'
+          ]
+        ],
+        [
+          '200000000',
+          ['200800000'],
+          [
+            ' _  _  _  _  _  _  _  _  _ ',
+            ' _|| || || || || || || || |',
+            '|_ |_||_||_||_||_||_||_||_|'
+          ]
+        ],
+        [
+          '333333333',
+          ['333393333'],
+          [
+            ' _  _  _  _  _  _  _  _  _ ',
+            ' _| _| _| _| _| _| _| _| _|',
+            ' _| _| _| _| _| _| _| _| _|'
+          ]
+        ],
+        [
+          '888888888',
+          ['888886888', '888888880', '888888988'],
+          [
+            ' _  _  _  _  _  _  _  _  _ ',
+            '|_||_||_||_||_||_||_||_||_|',
+            '|_||_||_||_||_||_||_||_||_|'
+          ]
+        ],
+        [
+          '555555555',
+          ['555655555', '559555555'],
+          [
+            ' _  _  _  _  _  _  _  _  _ ',
+            '|_ |_ |_ |_ |_ |_ |_ |_ |_ ',
+            ' _| _| _| _| _| _| _| _| _|'
+          ]
+        ],
+        [
+          '666666666',
+          ['666566666', '686666666'],
+          [
+            ' _  _  _  _  _  _  _  _  _ ',
+            '|_ |_ |_ |_ |_ |_ |_ |_ |_ ',
+            '|_||_||_||_||_||_||_||_||_|'
+          ]
+        ],
+        [
+          '999999999',
+          ['899999999', '993999999', '999959999'],
+          [
+            ' _  _  _  _  _  _  _  _  _ ',
+            '|_||_||_||_||_||_||_||_||_|',
+            ' _| _| _| _| _| _| _| _| _|'
+          ]
+        ],
+        [
+          '490067715',
+          ['490067115', '490067719', '490867715'],
+          [
+            '    _  _  _  _  _  _     _ ',
+            '|_||_|| || ||_   |  |  ||_ ',
+            '  | _||_||_||_|  |  |  | _|',
+          ]
+        ],
+        [
+          '?23456789',
+          ['123456789'],
+          [
+            '    _  _     _  _  _  _  _ ',
+            ' _| _| _||_||_ |_   ||_||_|',
+            '  ||_  _|  | _||_|  ||_| _|'
+          ]
+        ],
+        [
+          '0?0000051',
+          ['000000051'],
+          [
+            ' _     _  _  _  _  _  _    ',
+            '| || || || || || || ||_   |',
+            '|_||_||_||_||_||_||_| _|  |'
+          ]
+        ],
+        [
+          '49086771?',
+          ['490867715'],
+          [
+            '    _  _  _  _  _  _     _ ',
+            '|_||_|| ||_||_   |  |  | _ ',
+            '  | _||_||_||_|  |  |  | _|'
+          ]
+        ]
+      ]
+
+      testCases.forEach(([parsed, alternatives, text]) => {
+        describe('when text has valid alternatives', () => {
+          const bankAccount = BankAccount.parse(text.join('\n'))
+
+          it('parses the expected bank account', () => {
+            expect(bankAccount.format()).toBe(parsed)
+          })
+
+          it('returns an Array with alternative bank accounts', () => {
+            expectAlternativeAccounts(
+              bankAccount,
+              alternatives.map(number => new BankAccount(number))
+            )
+          })
+        })
+      })
+    })
+  })
 })

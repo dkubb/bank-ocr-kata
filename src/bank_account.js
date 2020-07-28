@@ -131,6 +131,35 @@ class BankAccount {
 
     return `${this.format()}${status}\n`
   }
+
+  /* Alternative Bank Accounts when invalid
+   *
+   * @returns {BankAccount[]}
+   */
+  alternatives () {
+    // A valid Bank Account has no alternatives
+    // A Bank Account with no parsed digits cannot have alternatives
+    if (this.isValid() || this.digits === undefined) return []
+
+    return this.digits
+       // For each parsed digit, find the alternative candidate digits
+      .reduce((alternatives, digit, index) => {
+        const candidates = BankAccount.ALTERNATIVES[digit] || []
+
+        // Substitute each candidate into the original Bank Account Number
+        // and if it is valid, then add it to the list of alternatives
+        candidates.forEach(candidate => {
+          const copy = Array.from(this.number)
+          copy[index] = candidate
+          const bankAccount = new this.constructor (copy)
+          if (bankAccount.isValid()) alternatives.push(bankAccount)
+        })
+
+        return alternatives
+      }, [])
+      // Sort the alternatives to match the expected test case output
+      .sort((a, b) => a.format() - b.format())
+  }
 }
 
 const alts = BankAccount.ALTERNATIVES
