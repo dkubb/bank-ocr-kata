@@ -299,4 +299,30 @@ describe('BankAccount', () => {
       })
     })
   })
+
+  describe('#statusLine', () => {
+    describe('when the bank account is valid', () => {
+      const bankAccount = new BankAccount('345882865')
+
+      it('returns the number', () => {
+        expect(bankAccount.statusLine()).toBe('345882865\n')
+      })
+    })
+
+    describe('when the bank account is not legible', () => {
+      const bankAccount = new BankAccount('34588286?')
+
+      it('returns the illegible status', () => {
+        expect(bankAccount.statusLine()).toBe('34588286? ILL\n')
+      })
+    })
+
+    describe('when the bank account is not valid', () => {
+      const bankAccount = new BankAccount('345882864')
+
+      it('returns the error status', () => {
+        expect(bankAccount.statusLine()).toBe('345882864 ERR\n')
+      })
+    })
+  })
 })

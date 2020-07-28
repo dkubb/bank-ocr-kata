@@ -114,6 +114,20 @@ class BankAccount {
     // The question mark cannot appear in the number for it to be legible
     return this.number.indexOf('?') === -1
   }
+
+  /* Returns a formatted status line for reports
+   *
+   * @returns {string}
+   */
+  statusLine () {
+    // Display illegible or error status. If the Bank Account
+    // is valid, then return no status.
+    const status = !this.isLegible() ? ' ILL' :
+                   !this.isValid()   ? ' ERR' :
+                                       ''
+
+    return `${this.format()}${status}\n`
+  }
 }
 
 module.exports = BankAccount
